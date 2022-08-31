@@ -1,0 +1,3 @@
+# Document-Checker-App
+
+A Google Apps Script (GAS) Web App made for assisting administrative staff to review and check documents based on the assigned institutions given. The web app utilizes a Google Sheets set as database for assignment of the administrative staff and documents they have to review whilst interface relies on the Semantic UI CSS Framework. The web app was originally developed to ease the task of administrative staff in reviewing and checking institutional documents related to contractual arrangements of numerous universities. The idea is to ensure each staff only accesses their assigned universities' documents to check and avoiding the need to trace and search the documents in Google Drive or other storage systems
