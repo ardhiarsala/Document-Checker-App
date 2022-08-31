@@ -1,0 +1,109 @@
+<script>
+
+function getUserInput() {
+    var email = document.getElementById('input-id').value;
+
+var query = encodeURIComponent("Select * where A matches " + '"' + email + '"')
+var out = "https://docs.google.com/spreadsheets/d/1LUckU1Jrt2cV2a3NRTK3igsU_lYIxQzS4fXOl46faRo/gviz/tq?tqx=out:csv&gid=950795766&tq=" + query;
+var main = document.querySelector("#main");
+var body = document.querySelector("#body");
+var app = document.querySelector("#app");
+var form = document.querySelector("#form");
+var refresh = document.querySelector("#refresh");
+
+
+  main.innerHTML = "<p><b>Loading...</b></p><div class='ui active inline loader'></div>";
+  fetch(out).then(result => result.text()).then(function(csvtext) {
+    return csv().fromString(csvtext);
+  }).then(function(csv) {
+    csv.forEach(function(row) {
+
+if(row.kelompokpt == "PRIVATE" || row.kelompokpt == "PUBLIC"){
+main.innerHTML = `<br/><h2>Hi ${row.admin}</h2>`;
+app.innerHTML += `<div class="ui styled fluid accordion">
+  <div style="background-color:#4d7198;" class="title">
+    <i class="dropdown icon"></i>
+    <strong>[${row.universitytype}] ${row.university}&emsp;|&emsp;${row.date}</strong>
+  </div>
+  <div class="content">
+    <a class="ui olive button" target="_blank" href="${row.worksheet}">WORKSHEET</a></td>
+    <td><a class="ui blue button" target="_blank" href="https://drive.google.com/drive/folders/${row.folders}">FOLDER</a>&emsp;PAYMENT 1:&emsp;<b style="font-size:16px;">${row.payment1}</b>&emsp;PAYMENT 2:&emsp;<b style="font-size:16px">${row.payment2}</b>
+      <div class="fluid accordion hidden">
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          1. Document 1&emsp;<a target="_blank" href="https://docs.google.com/document/d/${row.doc1id}/export?format=pdf&attachment=false">DOWNLOAD</a>
+        </div>
+        <div class="content">
+          <div class="ui  embed" data-url="https://drive.google.com/file/d/${row.doc1id}/preview"></div>
+        </div>
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          2. Document 2&emsp;<a target="_blank" href="https://docs.google.com/document/d/${row.doc3id}/export?format=pdf&attachment=false">DOWNLOAD</a>
+        </div>
+        <div class="content">
+          <div class="ui embed" data-url="https://drive.google.com/file/d/${row.doc3id}/preview"></div>
+        </div>
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          3. Document 3&emsp;<a target="_blank" href="https://docs.google.com/document/d/${row.doc4id}/export?format=pdf&attachment=false">DOWNLOAD</a>
+        </div>
+        <div class="content">
+          <div class="ui embed" data-url="https://drive.google.com/file/d/${row.doc4id}/preview"></div>
+        </div>
+
+      </div>
+  </div>
+</div><br/>`
+
+
+      $('.ui.accordion').accordion();
+} else{
+  main.innerHTML = `<br/><h2>Hi ${row.admin}</h2>`;
+app.innerHTML += `<div class="ui styled fluid accordion">
+  <div style="background-color:#4d7198;" class="title">
+    <i class="dropdown icon"></i>
+    <strong>[${row.universitytype}] ${row.university}&emsp;|&emsp;${row.date}</strong>
+  </div>
+  <div class="content">
+    <a class="ui olive button" target="_blank" href="${row.worksheet}">WORKSHEET</a></td>
+    <td><a class="ui blue button" target="_blank" href="https://drive.google.com/drive/folders/${row.folders}">FOLDER</a>&emsp;PAYMENT 1:&emsp;<b style="font-size:16px;">${row.payment1}</b>&emsp;PAYMENT 2:&emsp;<b style="font-size:16px">${row.payment2}</b>
+      <div class="fluid accordion hidden">
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          1. Document 1&emsp;<a target="_blank" href="https://docs.google.com/document/d/${row.doc1id}/export?format=pdf&attachment=false">DOWNLOAD</a>
+        </div>
+        <div class="content">
+          <div class="ui  embed" data-url="https://drive.google.com/file/d/${row.doc1id}/preview"></div>
+        </div>
+
+        <div class="title">
+          <i class="dropdown icon"></i>
+          2. Document 2&emsp;<a target="_blank" href="https://docs.google.com/document/d/${row.doc3id}/export?format=pdf&attachment=false">DOWNLOAD</a>
+        </div>
+        <div class="content">
+          <div class="ui embed" data-url="https://drive.google.com/file/d/${row.doc3id}/preview"></div>
+        </div>
+
+      </div>
+  </div>
+</div><br/>`
+
+
+      $('.ui.accordion').accordion();
+}
+    })
+      app.style.display="block";
+      form.style.display="none"
+      refresh.style.display="inline"
+      datatable.style.display="inline"
+
+      $(' .ui.embed').embed();
+
+  });
+
+}
+</script>
