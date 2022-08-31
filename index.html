@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <base target="_self">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Checker App</title>
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    strong {
+  font-weight:bold;
+  font-size:18px;
+  line-height:22px;
+  color:white;
+  }
+  </style>
+  <script src="https://cdn.rawgit.com/Keyang/node-csvtojson/d41f44aa/browser/csvtojson.min.js"></script>
+    <link href=
+"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+            rel="stylesheet" />
+ 
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity=
+"sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+    </script>
+ 
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js">
+    </script>
+
+
+</head>
+
+
+<body>
+
+  <section id="title">
+
+<div class="ui container">
+		<br>
+		<div class="column">
+      <div id="loader"></div>
+    <h1 style="font-size:35.5px;">Document Checker App</h1>
+          <hr>
+          </hr>
+          
+<br/><button class="ui grey basic button" id="refresh" style="display:none" onclick="reLoad()">
+  LOGOUT
+  </button>
+  <button class="ui secondary button" id="datatable" style="display:none" onclick="window.open('https://github.com/ardhiarsala')">
+  CONTACTS
+  </button>
+
+<form class="ui form" id="form" onsubmit="event.preventDefault(); return getUserInput()">
+  <div class="field">
+    <div class="four wide field">
+    <label>Email</label>
+    <input type="text" id="input-id" placeholder="Email">
+  </div>
+  </div>
+  <button class="ui button" type="submit">Login</button>
+</form>
+
+<br/>
+          <p id="main"></p>
+          <div id="app" class="ui container" style="display:none">
+
+          </div><br/>
+
+  </section>
+
+    <?!= include('js'); ?>
+
+</body>
+
+<script>
+  function reLoad() {
+    main.innerHTML = "<br/><p><b>Refreshing, kindly wait... <i class='circle notch loading icon'></i></b></p>";
+       app.style.display="none"
+       google.script.run
+      .withSuccessHandler(function(url){
+        window.open(url,'_top');
+      })
+      .getScriptURL();
+}
+</script>
+
+</html>
